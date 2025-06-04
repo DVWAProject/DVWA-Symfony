@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+<h1 class="text-2xl font-bold mb-6 text-center">Créer un compte</h1>
+<form method="post" class="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto space-y-4">
+  <input type="text" name="name" placeholder="Nom complet" required class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-500">
+  <input type="email" name="email" placeholder="Email" required class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-500">
+  <input type="password" name="password" placeholder="Mot de passe" required class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-500">
+  <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+    S’inscrire
+  </button>
+</form>
+<p class="text-center mt-4 text-sm text-gray-500">
+  Déjà inscrit ? <a href="/login" class="text-green-600 hover:underline">Se connecter</a>
+</p>
+{% endblock %}

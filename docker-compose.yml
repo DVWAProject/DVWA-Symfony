@@ -1,0 +1,37 @@
+services:
+  php:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: symfony_php
+    volumes:
+      - ./symfony:/var/www/symfony
+    depends_on:
+      - db
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: symfony_nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./symfony:/var/www/symfony
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+
+  db:
+    image: mariadb:11.4
+    container_name: symfony_mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: symfony
+      MARIADB_USER: symfony
+      MARIADB_PASSWORD: symfony
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
